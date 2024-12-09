@@ -1,0 +1,67 @@
+spring:
+  profiles:
+    active: local
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+  # 기본 애플리케이션 설정
+  application:
+    name: oauth-demo-app
+
+  # H2 인메모리 데이터베이스 설정
+  datasource:
+    url: jdbc:h2:mem:oauth
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  # H2 콘솔 활성화 (선택사항)
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  # JPA 설정
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
+
+  # OAuth2 클라이언트 설정 (예: Google)
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            scope:
+              - email
+              - profile
+
+  # Thymeleaf 설정
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+
+# 서버 포트 설정
+server:
+  port: 8080
+
+# 로깅 설정
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.web: INFO
+    org.hibernate.SQL: DEBUG
+
+# 애플리케이션 관련 커스텀 설정
+app:
+  oauth:
+    redirect-uri: http://localhost:8080/login/oauth2/code/google
