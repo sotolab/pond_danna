@@ -13,7 +13,7 @@ spring:
 
   # H2 인메모리 데이터베이스 설정
   datasource:
-    url: jdbc:h2:mem:oauth
+    url: jdbc:h2:mem:test
     driver-class-name: org.h2.Driver
     username: sa
     password:
@@ -52,7 +52,7 @@ spring:
 
 # 서버 포트 설정
 server:
-  port: 8080
+  port: 8085
 
 # 로깅 설정
 logging:
@@ -64,4 +64,4 @@ logging:
 # 애플리케이션 관련 커스텀 설정
 app:
   oauth:
-    redirect-uri: http://localhost:8080/login/oauth2/code/google
+    redirect-uri: http://localhost:8085/login/oauth2/code/google
